@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">To.Do</string>
+    <string name="note_hint">Note</string>
+    <string name="save_button_text">Save</string>
+    <string name="empty_message_text">Please add a Todo Note</string>
+    <string name="take_a_note_hint">Take a Note....</string>
+    <string name="delete_title">delete</string>
+    <string name="activity_edit_title">Edit To.Do</string>
+    <string name="error_message_empty_text">Please enter valid Todo Item</string>
+    <string name="alert_dialog_title">Delete Todo Item</string>
+    <string name="alert_message">Are you sure you want to delete this item?</string>
+    <string name="alert_positive">Yes</string>
+    <string name="alert_negative">No</string>
+    <string name="title">Title</string>
+</resources>
