@@ -40,8 +40,8 @@ public class ToDoListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Get the cursor, positioned to the corresponding row in the result set
                 Cursor cursor = (Cursor) gvTodoItemList.getItemAtPosition(position);
-                String itemValue = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_ITEM));
-                String itemTitle = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_TITLE));
+                String itemValue = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_TASK));
+                String itemTitle = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_DESCRIPTION));
                 Integer itemId = cursor.getInt(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_ID));
 
                 Intent editTodoIntent = new Intent(ToDoListActivity.this, EditTodoItemActivity.class);
@@ -83,7 +83,7 @@ public class ToDoListActivity extends AppCompatActivity {
     private void fetchTodoList() {
         // The desired columns to be bound
         String[] columns = new String[]{
-                todoDBHelper.TODO_COLUMN_ITEM, todoDBHelper.TODO_COLUMN_TITLE
+                todoDBHelper.TODO_COLUMN_TASK, todoDBHelper.TODO_COLUMN_DESCRIPTION
         };
 
         // the XML defined views which the data will be bound to

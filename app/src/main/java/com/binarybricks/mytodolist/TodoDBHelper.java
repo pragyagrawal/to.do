@@ -14,8 +14,11 @@ public class TodoDBHelper extends SQLiteOpenHelper {
     private final static String DATABASE_NAME = "TodoDatabase";
     public static final String TODO_TABLE_NAME = "todoList";
     public static final String TODO_COLUMN_ID = "_id";
-    public static final String TODO_COLUMN_ITEM = "item";
-    public static final String TODO_COLUMN_TITLE = "title";
+    public static final String TODO_COLUMN_TASK = "task";
+    public static final String TODO_COLUMN_DESCRIPTION = "description";
+    public static final String TODO_COLUMN_DUE_DATE = "dueDate";
+    public static final String TODO_COLUMN_PRIORITY = "priority";
+    public static final String TODO_COLUMN_LABEL = "label";
 
     public TodoDBHelper(Context context) {
 
@@ -25,18 +28,21 @@ public class TodoDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
                 "create table todoList " +
-                        "(_id integer primary key, item text, title text)"
+                        "(_id integer primary key, task text, description text, dueDate text, priority text, label text)"
         );
     }
 
     public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
     }
 
-    public boolean insertTodoItem(String item, String title) {
+    public boolean insertTodoItem(String task, String description, String dueDate, String priority, String label) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(TODO_COLUMN_ITEM, item);
-        contentValues.put(TODO_COLUMN_TITLE, title);
+        contentValues.put(TODO_COLUMN_TASK, task);
+        contentValues.put(TODO_COLUMN_DESCRIPTION, description);
+        contentValues.put(TODO_COLUMN_DUE_DATE, dueDate);
+        contentValues.put(TODO_COLUMN_PRIORITY, priority);
+        contentValues.put(TODO_COLUMN_LABEL, label);
         db.insert(TODO_TABLE_NAME, null, contentValues);
         return true;
     }
@@ -47,11 +53,14 @@ public class TodoDBHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public boolean updateTodoList(Integer id, String updatedItem, String updatedTitle) {
+    public boolean updateTodoList(Integer id, String updatedTask, String updatedDescription, String updatedDueDate, String updatedPriotity, String updatedLabel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(TODO_COLUMN_ITEM, updatedItem);
-        contentValues.put(TODO_COLUMN_TITLE, updatedTitle);
+        contentValues.put(TODO_COLUMN_TASK, updatedTask);
+        contentValues.put(TODO_COLUMN_DESCRIPTION, updatedDescription);
+        contentValues.put(TODO_COLUMN_DUE_DATE, updatedDueDate);
+        contentValues.put(TODO_COLUMN_PRIORITY, updatedPriotity);
+        contentValues.put(TODO_COLUMN_LABEL, updatedLabel);
         db.update(TODO_TABLE_NAME, contentValues, "_id = ? ", new String[]{Integer.toString(id)});
         return true;
     }
