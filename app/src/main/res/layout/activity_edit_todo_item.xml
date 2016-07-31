@@ -1,41 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.binarybricks.mytodolist.EditTodoItemActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.binarybricks.mytodolist.EditTodoItemActivity">
 
-
-    <EditText
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/etEditTodoItemTitle"
-        android:layout_marginTop="@dimen/margin_top_small"
-        android:hint="@string/title"
-        android:textSize="@dimen/edit_text_title_text_size"
-        android:textStyle="bold"
-        android:background="@android:color/transparent"
-        />
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextColor="@android:color/white"></android.support.v7.widget.Toolbar>
 
-    <EditText
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/etEditTodoItem"
-        android:layout_marginTop="@dimen/margin_top_medium"
-        android:layout_marginBottom="@dimen/margin_bottom"
-        android:hint="@string/note_hint"
-        android:textSize="@dimen/edit_item_text_size"
-        android:background="@android:color/transparent"
-        />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/save_button_text"
-        android:id="@+id/btnSave"/>
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/rlTask"
+                android:layout_weight="2"
+                android:background="@color/colorPrimary"
+                android:paddingLeft="16dp">
+
+                <EditText
+                    android:id="@+id/etTask"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:background="@android:color/transparent"
+                    android:hint="Task"
+                    android:textColor="@color/colorTextIcons"
+                    android:textColorHint="@color/colorTextIcons"
+                    android:textSize="28sp" />
+
+                <EditText
+                    android:id="@+id/etDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/etTask"
+                    android:layout_margin="12dp"
+                    android:background="@android:color/transparent"
+                    android:hint="Description"
+                    android:lines="3687"
+                    android:textColor="@color/colorTextIcons"
+                    android:textColorHint="@color/colorTextIcons"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3">
+
+                <LinearLayout
+                    android:id="@+id/llDueDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/due_date" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvDueDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Due Date"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvSetDueDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvDueDate"
+                            android:layout_marginTop="4dp"
+                            android:hint="due date"
+                            android:textSize="18sp" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llPriority"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/llDueDate"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/priority" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvPriority"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Priority"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvSetPriority"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvPriority"
+                            android:layout_marginTop="4dp"
+                            android:hint="priority"
+                            android:textSize="18sp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/llPriority"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/label" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Label"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvSetLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvLabel"
+                            android:layout_marginTop="4dp"
+                            android:hint="label"
+                            android:textSize="18sp" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:src="@drawable/done_button"
+            app:layout_anchor="@id/rlTask"
+            app:layout_anchorGravity="bottom|right|end"/>
+    </android.support.design.widget.CoordinatorLayout>
+
+</RelativeLayout>

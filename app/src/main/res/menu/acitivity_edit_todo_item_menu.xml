@@ -7,4 +7,10 @@
     android:icon="@android:drawable/ic_menu_delete"
     app:showAsAction="always">
 </item>
+    <item
+        android:id="@+id/share_todo_item"
+        android:title="@string/share_title"
+        android:icon="@android:drawable/ic_menu_share"
+        app:showAsAction="always">
+    </item>
 </menu>

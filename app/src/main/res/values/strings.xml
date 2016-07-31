@@ -5,6 +5,7 @@
     <string name="empty_message_text">Please add a Todo Note</string>
     <string name="take_a_note_hint">Take a Note....</string>
     <string name="delete_title">delete</string>
+    <string name="share_title">share</string>
     <string name="activity_edit_title">Edit To.Do</string>
     <string name="error_message_empty_text">Please enter valid Todo Item</string>
     <string name="alert_dialog_title">Delete Todo Item</string>
