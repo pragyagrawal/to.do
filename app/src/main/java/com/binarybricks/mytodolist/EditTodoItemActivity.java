@@ -1,23 +1,53 @@
 package com.binarybricks.mytodolist;
 
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
+import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class EditTodoItemActivity extends AppCompatActivity {
 
-    private EditText etEditTodoText;
-    private EditText etEditTodoTitle;
-    private Button btnSaveTodoItem;
+    @BindView(R.id.etTask)
+    EditText etEditTask;
+    @BindView(R.id.etDescription)
+    EditText etEditDescription;
+    @BindView(R.id.tvSetDueDate)
+    TextView tvEditDueDate;
+    @BindView(R.id.tvSetPriority)
+    TextView tvEditPriority;
+    @BindView(R.id.etSetHashTag)
+    EditText etEditHashTag;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     private TodoDBHelper todoDBHelper;
-    private Integer editItemId;
+    private Integer editTaskId;
+
+
+    Calendar c = Calendar.getInstance();
+    int startYear = c.get(Calendar.YEAR);
+    int startMonth = c.get(Calendar.MONTH);
+    int startDay = c.get(Calendar.DAY_OF_MONTH);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,49 +56,50 @@ public class EditTodoItemActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        String editItemValue = getIntent().getStringExtra("edit_item_value");
-        String editItemTitle = getIntent().getStringExtra("edit_item_title");
-        editItemId = getIntent().getIntExtra("edit_item_id", 0);
-//
-//        etEditTodoText = (EditText) findViewById(R.id.etEditTodoItem);
-//        etEditTodoTitle = (EditText) findViewById(R.id.etEditTodoItemTitle);
-//        btnSaveTodoItem = (Button) findViewById(R.id.btnSave);
-//
-//        etEditTodoText.setText(editItemValue);
-//        etEditTodoTitle.setText(editItemTitle);
-//
-//        todoDBHelper = new TodoDBHelper(EditTodoItemActivity.this);
-//
-//        btnSaveTodoItem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String todoItemTitle = etEditTodoTitle.getText().toString();
-//                String todoItemText = etEditTodoText.getText().toString();
-//                if (!TextUtils.isEmpty(todoItemText)) {
-//                    if (editItemId > 0) {
-//                        todoDBHelper.updateTodoList(editItemId,todoItemText,todoItemTitle);
-//                    } else {
-//                        todoDBHelper.insertTodoItem(todoItemText, todoItemTitle);
-//                    }
-//                    setResult(RESULT_OK);
-//                    finish();
-//                } else {
-//                    Toast.makeText(EditTodoItemActivity.this, R.string.error_message_empty_text, Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-//    }
-//
+        editTaskId = getIntent().getIntExtra("task_id", 0);
+        String editTask = getIntent().getStringExtra("edit_task");
+        String editDescription = getIntent().getStringExtra("edit_description");
+        String editDueDate = getIntent().getStringExtra("edit_due_date");
+        String editPriority = getIntent().getStringExtra("edit_priority");
+        String editHashTag = getIntent().getStringExtra("edit_hash_tag");
+
+        etEditTask.setText(editTask);
+        etEditDescription.setText(editDescription);
+        tvEditDueDate.setText(editDueDate);
+        tvEditPriority.setText(editPriority);
+        etEditHashTag.setText(editHashTag);
+
+        todoDBHelper = new TodoDBHelper(EditTodoItemActivity.this);
+    }
+
+    @OnClick(R.id.fabSave)
+    void saveTask(View v){
+        String todoTask = etEditTask.getText().toString();
+        String todoDescription = etEditDescription.getText().toString();
+        String todoDueDate = tvEditDueDate.getText().toString();
+        String todoPriority = tvEditPriority.getText().toString();
+        String todoHashTag = etEditHashTag.getText().toString();
+
+        if (!TextUtils.isEmpty(todoTask)) {
+            if (editTaskId > 0) {
+                todoDBHelper.updateTodoList(editTaskId, todoTask, todoDescription, todoDueDate, todoPriority, todoHashTag);
+            } else {
+                todoDBHelper.insertTodoItem(todoTask, todoDescription, todoDueDate, todoPriority, todoHashTag);
+            }
+            setResult(RESULT_OK);
+            finish();
+        } else {
+            Toast.makeText(EditTodoItemActivity.this, R.string.error_message_empty_text, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (editItemId > 0) {
+        if (editTaskId > 0) {
             MenuInflater menuInflater = getMenuInflater();
             menuInflater.inflate(R.menu.acitivity_edit_todo_item_menu, menu);
         }
@@ -79,7 +110,7 @@ public class EditTodoItemActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.delete_todo_item:
-                todoDBHelper.deleteTodoItem(editItemId);
+                todoDBHelper.deleteTodoItem(editTaskId);
                 setResult(RESULT_OK);
                 finish();
                 return true;
@@ -88,5 +119,37 @@ public class EditTodoItemActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @OnClick(R.id.llDueDate)
+    void setDueDate(View v)
+    {
+        DatePickerDialog dialog = new DatePickerDialog(EditTodoItemActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+             //you will get date here
+                GregorianCalendar calendar = new GregorianCalendar(year,monthOfYear,dayOfMonth);
+                SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy");
+                sdf.setCalendar(calendar);
+                String formatedDate = sdf.format(calendar.getTime());
+                tvEditDueDate.setText(formatedDate);
+            }
+        }, startYear, startMonth, startDay);
+
+        dialog.show();
+    }
+
+    @OnClick(R.id.llPriority)
+    void setPriority(View v){
+        final CharSequence[] priority = {"High", "Medium","Low"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Priority:");
+        builder.setItems(priority,new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                tvEditPriority.setText(priority[item]);
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

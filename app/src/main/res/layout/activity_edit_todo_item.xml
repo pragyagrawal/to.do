@@ -162,20 +162,20 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:id="@+id/tvLabel"
+                            android:id="@+id/tvHashTag"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Label"
+                            android:text="#HashTag"
                             android:textSize="20sp" />
 
-                        <TextView
-                            android:id="@+id/tvSetLabel"
-                            android:layout_width="wrap_content"
+                        <EditText
+                            android:id="@+id/etSetHashTag"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/tvLabel"
+                            android:layout_below="@+id/tvHashTag"
                             android:layout_marginTop="4dp"
-                            android:hint="label"
+                            android:hint="Eg. #task, #office"
                             android:textSize="18sp" />
                     </RelativeLayout>
 
@@ -183,7 +183,7 @@
             </RelativeLayout>
         </LinearLayout>
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/fabSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"

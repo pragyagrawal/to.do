@@ -40,14 +40,20 @@ public class ToDoListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Get the cursor, positioned to the corresponding row in the result set
                 Cursor cursor = (Cursor) gvTodoItemList.getItemAtPosition(position);
-                String itemValue = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_TASK));
-                String itemTitle = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_DESCRIPTION));
-                Integer itemId = cursor.getInt(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_ID));
+                String task = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_TASK));
+                String description = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_DESCRIPTION));
+                String dueDate  = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_DUE_DATE));
+                String priority = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_PRIORITY));
+                String hashTag = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_HASHTAG));
+                Integer taskId = cursor.getInt(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_ID));
 
                 Intent editTodoIntent = new Intent(ToDoListActivity.this, EditTodoItemActivity.class);
-                editTodoIntent.putExtra("edit_item_id", itemId);
-                editTodoIntent.putExtra("edit_item_value", itemValue);
-                editTodoIntent.putExtra("edit_item_title", itemTitle);
+                editTodoIntent.putExtra("task_id", taskId);
+                editTodoIntent.putExtra("edit_task", task);
+                editTodoIntent.putExtra("edit_description", description);
+                editTodoIntent.putExtra("edit_due_date", dueDate);
+                editTodoIntent.putExtra("edit_priority", priority);
+                editTodoIntent.putExtra("edit_hash_tag", hashTag);
                 startActivityForResult(editTodoIntent, 100);
             }
         });
@@ -64,8 +70,8 @@ public class ToDoListActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long id) {
                 Cursor cursor = (Cursor) gvTodoItemList.getItemAtPosition(pos);
-                Integer itemId = cursor.getInt(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_ID));
-                showDeleteDialog(itemId);
+                Integer taskId = cursor.getInt(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_ID));
+                showDeleteDialog(taskId);
                 return true;
             }
         });
@@ -102,14 +108,14 @@ public class ToDoListActivity extends AppCompatActivity {
 
     }
 
-    private void showDeleteDialog(final Integer itemId) {
+    private void showDeleteDialog(final Integer taskId) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle(getString(R.string.alert_dialog_title));
         alertDialogBuilder.setMessage(getString(R.string.alert_message));
         alertDialogBuilder.setPositiveButton(getString(R.string.alert_positive), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                todoDBHelper.deleteTodoItem(itemId);
+                todoDBHelper.deleteTodoItem(taskId);
                 fetchTodoList();
             }
         });
