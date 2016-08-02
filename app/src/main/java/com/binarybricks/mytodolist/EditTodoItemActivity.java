@@ -141,7 +141,7 @@ public class EditTodoItemActivity extends AppCompatActivity {
 
     @OnClick(R.id.llPriority)
     void setPriority(View v){
-        final CharSequence[] priority = {"High", "Medium","Low"};
+        final CharSequence[] priority = {"High","Medium","Low"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Priority:");
         builder.setItems(priority,new DialogInterface.OnClickListener() {
