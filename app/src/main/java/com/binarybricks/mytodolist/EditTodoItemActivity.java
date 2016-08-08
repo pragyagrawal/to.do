@@ -2,9 +2,12 @@ package com.binarybricks.mytodolist;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -102,10 +105,25 @@ public class EditTodoItemActivity extends AppCompatActivity {
         if (editTaskId > 0) {
             MenuInflater menuInflater = getMenuInflater();
             menuInflater.inflate(R.menu.acitivity_edit_todo_item_menu, menu);
+
+            MenuItem itemShare = menu.findItem(R.id.share_todo_item);
+            mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(itemShare);
+            if (mShareActionProvider!=null){
+                mShareActionProvider.setShareIntent(createShareTaskIntent());
+            }
         }
         return true;
     }
 
+    private Intent createShareTaskIntent() {
+        Intent shareIntent=new Intent(Intent.ACTION_SEND);
+        shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT,"#Todo");
+        return shareIntent;
+    }
+
+    private ShareActionProvider mShareActionProvider;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

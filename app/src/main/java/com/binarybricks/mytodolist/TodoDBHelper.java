@@ -19,6 +19,7 @@ public class TodoDBHelper extends SQLiteOpenHelper {
     public static final String TODO_COLUMN_DUE_DATE = "dueDate";
     public static final String TODO_COLUMN_PRIORITY = "priority";
     public static final String TODO_COLUMN_HASHTAG = "hashTag";
+    public static final String TODO_COLUMN_STATUS = "status";
 
     public TodoDBHelper(Context context) {
 
@@ -28,7 +29,7 @@ public class TodoDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
                 "create table todoList " +
-                        "(_id integer primary key, task text, description text, dueDate text, priority text, hashTag text)"
+                        "(_id integer primary key, task text, description text, dueDate text, priority text, hashTag text,status integer)"
         );
     }
 
@@ -43,13 +44,14 @@ public class TodoDBHelper extends SQLiteOpenHelper {
         contentValues.put(TODO_COLUMN_DUE_DATE, dueDate);
         contentValues.put(TODO_COLUMN_PRIORITY, priority);
         contentValues.put(TODO_COLUMN_HASHTAG, hashTag);
+        contentValues.put(TODO_COLUMN_STATUS, 0);
         db.insert(TODO_TABLE_NAME, null, contentValues);
         return true;
     }
 
     public Cursor getTodoList() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from todoList", null);
+        Cursor res = db.rawQuery("select * from todoList where status!=1", null);
         return res;
     }
 
@@ -65,10 +67,30 @@ public class TodoDBHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    public boolean updateStatus(Integer id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TODO_COLUMN_STATUS, 1);
+        db.update(TODO_TABLE_NAME, contentValues, "_id=?", new String[]{Integer.toString(id)});
+        return true;
+    }
+
     public Integer deleteTodoItem(Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TODO_TABLE_NAME,
                 "_id = ? ",
                 new String[]{Integer.toString(id)});
+    }
+
+    public Cursor getSearchResult(String task) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from todoList where task like '%" + task + "%' or hashTag like '%" + task + "%'", null);
+        return res;
+    }
+
+    public Cursor getCompletedTodoList() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from todoList where status==1", null);
+        return res;
     }
 }

@@ -19,25 +19,48 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/add_task"
+                    android:id="@+id/ivAddTask"
+                    android:visibility="gone"
+                    android:layout_centerInParent="true"/>
             <TextView
                 android:id="@+id/emptyListMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/empty_message_text"
-                android:textSize="@dimen/empty_message_text_size" />
+                android:textSize="@dimen/empty_message_text_size"
+                android:visibility="gone" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tvNoResultsMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_search_result"
+                android:textSize="@dimen/empty_message_text_size"
+                android:visibility="gone" />
 
             <ListView
+                android:id="@+id/lvTodoList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/lvTodoList"></ListView>
+                android:divider="@android:color/transparent"
+                android:dividerHeight="4dp" />
 
-        </LinearLayout>
+
+        </RelativeLayout>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabAdd"
@@ -45,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:clickable="true"
-            android:src="@drawable/add_task"
+            android:src="@drawable/add_task1"
             app:layout_anchor="@id/lvTodoList"
             app:layout_anchorGravity="bottom|right|end" />
 

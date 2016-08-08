@@ -1,18 +1,26 @@
 package com.binarybricks.mytodolist;
 
-import android.content.DialogInterface;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+
+import com.binarybricks.mytodolist.utils.TodoCursorAdapter;
+import com.wdullaer.swipeactionadapter.SwipeActionAdapter;
+import com.wdullaer.swipeactionadapter.SwipeDirection;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,6 +33,12 @@ public class ToDoListActivity extends AppCompatActivity {
     @BindView(R.id.emptyListMessage)
     TextView tvEmptyListMessage;
 
+    @BindView(R.id.ivAddTask)
+    ImageView ivAddTask;
+
+    @BindView(R.id.tvNoResultsMessage)
+    TextView tvNoResult;
+
     @BindView(R.id.fabAdd)
     FloatingActionButton fabAdd;
 
@@ -32,7 +46,8 @@ public class ToDoListActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     TodoDBHelper todoDBHelper;
-    SimpleCursorAdapter cursorAdapter;
+    SwipeActionAdapter swipeAdapter;
+    TodoCursorAdapter todoCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +61,7 @@ public class ToDoListActivity extends AppCompatActivity {
         todoDBHelper = new TodoDBHelper(ToDoListActivity.this);
 
         fetchTodoList();
+        handleIntent(getIntent());
 
         lvTodoItemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -78,15 +94,41 @@ public class ToDoListActivity extends AppCompatActivity {
             }
         });
 
-        lvTodoItemList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        // Inflate menu to add items to action bar if it is present.
+        inflater.inflate(R.menu.activity_todo_item_menu, menu);
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search_completed_todo_item).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Cursor cursor = (Cursor) lvTodoItemList.getItemAtPosition(position);
-                Integer taskId = cursor.getInt(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_ID));
-                showDeleteDialog(taskId);
-                return true;
+            public boolean onClose() {
+                refreshTaskList();
+                swipeAdapter.notifyDataSetChanged();
+                return false;
             }
         });
+        searchView.setIconifiedByDefault(true);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.sort_by_completed_task) {
+            Intent completedTaskIntent = new Intent(ToDoListActivity.this,CompletedTaskActivity.class);
+            startActivity(completedTaskIntent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -99,43 +141,107 @@ public class ToDoListActivity extends AppCompatActivity {
     }
 
     private void fetchTodoList() {
-        // The desired columns to be bound
-        String[] columns = new String[]{
-                todoDBHelper.TODO_COLUMN_TASK, todoDBHelper.TODO_COLUMN_DESCRIPTION, todoDBHelper.TODO_COLUMN_DUE_DATE, todoDBHelper.TODO_COLUMN_PRIORITY
-        };
-
-        // the XML defined views which the data will be bound to
-        int[] to = new int[]{
-                R.id.tvItemTask, R.id.tvItemDescription, R.id.tvSetItemDueDate, R.id.tvSetPriorityColor
-        };
 
         Cursor cursor = todoDBHelper.getTodoList();
         if (cursor.getCount() > 0) {
+            ivAddTask.setVisibility(View.INVISIBLE);
             tvEmptyListMessage.setVisibility(View.INVISIBLE);
         } else {
+            ivAddTask.setVisibility(View.VISIBLE);
             tvEmptyListMessage.setVisibility(View.VISIBLE);
         }
-        cursorAdapter = new SimpleCursorAdapter(ToDoListActivity.this, R.layout.todo_item_view, cursor, columns, to, 0);
-        lvTodoItemList.setAdapter(cursorAdapter);
-    }
+        todoCursorAdapter = new TodoCursorAdapter(ToDoListActivity.this, cursor);
+        swipeAdapter = new SwipeActionAdapter(todoCursorAdapter);
+        swipeAdapter.setListView(lvTodoItemList);
+        lvTodoItemList.setAdapter(swipeAdapter);
 
-    private void showDeleteDialog(final Integer taskId) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle(getString(R.string.alert_dialog_title));
-        alertDialogBuilder.setMessage(getString(R.string.alert_message));
-        alertDialogBuilder.setPositiveButton(getString(R.string.alert_positive), new DialogInterface.OnClickListener() {
+        // Set backgrounds for the swipe directions
+        swipeAdapter.addBackground(SwipeDirection.DIRECTION_NORMAL_LEFT, R.layout.swipe_left)
+                .addBackground(SwipeDirection.DIRECTION_NORMAL_RIGHT, R.layout.swipe_right);
+
+        //Listen to Swipes
+        swipeAdapter.setSwipeActionListener(new SwipeActionAdapter.SwipeActionListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                todoDBHelper.deleteTodoItem(taskId);
-                fetchTodoList();
+            public boolean hasActions(int position, SwipeDirection direction) {
+                if (direction.isLeft())
+                    return true;            // Change this to false to disable left swipes
+                if (direction.isRight()) return true;
+                return false;
+            }
+
+            @Override
+            public boolean shouldDismiss(int position, SwipeDirection direction) {
+                return true;
+            }
+
+            @Override
+            public void onSwipe(int[] positionList, SwipeDirection[] directionList) {
+                for (int i = 0; i < positionList.length; i++) {
+                    SwipeDirection direction = directionList[i];
+                    int position = positionList[i];
+                    Cursor cursor = (Cursor) lvTodoItemList.getItemAtPosition(position);
+                    Integer taskId = cursor.getInt(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_ID));
+                    if (direction == SwipeDirection.DIRECTION_NORMAL_LEFT || direction == SwipeDirection.DIRECTION_FAR_LEFT) {
+                        todoDBHelper.deleteTodoItem(taskId);
+                    } else if (direction == SwipeDirection.DIRECTION_NORMAL_RIGHT || direction == SwipeDirection.DIRECTION_FAR_RIGHT) {
+                        todoDBHelper.updateStatus(taskId);
+                    }
+                    refreshTaskList();
+                    swipeAdapter.notifyDataSetChanged();
+                }
             }
         });
-        alertDialogBuilder.setNegativeButton(getString(R.string.alert_negative), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        alertDialogBuilder.show();
     }
+
+    private void refreshTaskList() {
+        Cursor cursor = todoDBHelper.getTodoList();
+        todoCursorAdapter.getCursor().close();
+        todoCursorAdapter.swapCursor(cursor);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            fetchSearchResult(query);
+        }
+    }
+
+    private void fetchSearchResult(String searchText) {
+        Cursor cursor = todoDBHelper.getSearchResult(searchText);
+        if (cursor.getCount() > 0) {
+            tvNoResult.setVisibility(View.INVISIBLE);
+            ivAddTask.setVisibility(View.INVISIBLE);
+        } else {
+            ivAddTask.setVisibility(View.VISIBLE);
+            tvNoResult.setVisibility(View.VISIBLE);
+        }
+        todoCursorAdapter.getCursor().close();
+        todoCursorAdapter.swapCursor(cursor);
+        swipeAdapter.notifyDataSetChanged();
+    }
+//    private void showDeleteDialog(final Integer taskId) {
+//        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+//        alertDialogBuilder.setTitle(getString(R.string.alert_dialog_title));
+//        alertDialogBuilder.setMessage(getString(R.string.alert_message));
+//        alertDialogBuilder.setPositiveButton(getString(R.string.alert_positive), new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                todoDBHelper.deleteTodoItem(taskId);
+//                fetchTodoList();
+//            }
+//        });
+//        alertDialogBuilder.setNegativeButton(getString(R.string.alert_negative), new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//
+//            }
+//        });
+//        alertDialogBuilder.show();
+//    }
 }

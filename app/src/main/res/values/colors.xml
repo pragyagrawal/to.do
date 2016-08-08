@@ -9,4 +9,8 @@
     <color name="colorDivider">#B6B6B6</color>
     <color name="colorTextIcons">#FFFFFF</color>
 
+    <color name="colorPriorityLow">#fbbdb8</color>
+    <color name="colorPriorityMedium">#f6665b</color>
+    <color name="colorPriorityHigh">#f22011</color>
+
 </resources>
