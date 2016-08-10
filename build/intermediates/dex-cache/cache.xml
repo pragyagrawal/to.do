@@ -1,3 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="7ceff8f8cb8df1d5c2a4ead1c2effdac9ddcdca3">
+        <dex dex="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_5e22e680a053804a1a3c7d9bb233062ad21e25d8\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.4.0_828b0acc79c929cd37fe2d7cf9ef3ee98d2c22db\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="949fb14fc9fe4839280df969e0de38ca3e1a37fc">
+        <dex dex="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_dd03b1833193d7e5160b19d30e41805c4b26db9c\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\PRAGYA\.gradle\caches\modules-2\files-2.1\com.android.support\support-annotations\24.0.0\2943c74db6d4346ab8c6531adac91fa05c137c40\support-annotations-24.0.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="2943c74db6d4346ab8c6531adac91fa05c137c40">
+        <dex dex="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.0.0_0d0eb7d7e84342dc3379ef76de75398c7099ad75\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="d9ecde39b460470e655de6e47c05573d2d5a8bfb">
+        <dex dex="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-cardview-v7-23.4.0_e1289f9d540d82294af6ea2e6f3ff859edcdc9ce\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-23.4.0_c768c963c4e969d603c5f6ff8e0eb89e7bdb440e\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-23.4.0_e7caa1b95287e1b30bc48c47a40fba7fbbdbd466\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\exploded-aar\com.jakewharton\butterknife\8.2.1\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ca5e58104f56f918f0fb3a5b1b371ab599ae56b2">
+        <dex dex="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.jakewharton-butterknife-8.2.1_5b4ddacd4e17844fa50ba7e5cf9a6b97581b78c1\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\exploded-aar\com.android.support\design\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-design-23.4.0_2b4b896d9f64051a026bd8bf16a631f1ed11b316\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-23.4.0_a871bd1f16f2210d4b5e962f02574f5c70b44a7d\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-23.4.0_feba168df956d20370aa4ff0218ae6107f28693c\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\PRAGYA\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife-annotations\8.2.1\d6f54d76edfbe779a50a8636b10fd3f555d8f780\butterknife-annotations-8.2.1.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="d6f54d76edfbe779a50a8636b10fd3f555d8f780">
+        <dex dex="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\transforms\dex\debug\folders\1000\10\butterknife-annotations-8.2.1_0ab5bc316190facce667e36cac0ac9f6fa7b0e9a\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-23.4.0_ab825ebab6212b9dd5bd79a8ce3a9cb44839d01a\classes.dex" />
+    </item>
+    <item
+        jar="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\exploded-aar\com.wdullaer\swipeactionadapter\2.0.0\jars\classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="9c7d9f294a6bce06b60e4221c13e2e51ff1cd755">
+        <dex dex="C:\Users\PRAGYA\Desktop\Android Study\AndroidStudioProjects\to.do\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.wdullaer-swipeactionadapter-2.0.0_bb7c82fb244f13d885c7c0cde2072e9bdcf74496\classes.dex" />
+    </item>
+
+</items>

@@ -9,7 +9,7 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 import com.binarybricks.mytodolist.R;
-import com.binarybricks.mytodolist.TodoDBHelper;
+import com.binarybricks.mytodolist.provider.todo.TodoColumns;
 
 /**
  * Created by PRAGYA on 8/1/2016.
@@ -39,11 +39,11 @@ public class TodoCursorAdapter extends CursorAdapter {
         TextView tvLabel = (TextView) view.findViewById(R.id.tvItemLabel);
 
         // Extract properties from cursor
-        String task = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_TASK));
-        String description = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_DESCRIPTION));
-        String dueDate = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_DUE_DATE));
-        String priority = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_PRIORITY));
-        String label = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_HASHTAG));
+        String task = cursor.getString(cursor.getColumnIndexOrThrow(TodoColumns.TASK));
+        String description = cursor.getString(cursor.getColumnIndexOrThrow(TodoColumns.DESCRIPTION));
+        String dueDate = cursor.getString(cursor.getColumnIndexOrThrow(TodoColumns.DUEDATE));
+        String priority = cursor.getString(cursor.getColumnIndexOrThrow(TodoColumns.PRIORITY));
+        String label = cursor.getString(cursor.getColumnIndexOrThrow(TodoColumns.HASHTAG));
 
         // Populate fields with extracted properties
         tvTask.setText(task);

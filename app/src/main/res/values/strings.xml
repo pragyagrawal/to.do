@@ -18,4 +18,15 @@
     <string name="title">Title</string>
     <string name="search_hint">Search Title,#task</string>
     <string name="no_search_result">No Result found.</string>
+    <string name="edit_task_hint">Task</string>
+    <string name="edit_description_hint">Description</string>
+    <string name="due_date_text">Due Date</string>
+    <string name="due_date_hint">due date</string>
+    <string name="priority_text">Priority</string>
+    <string name="priority_hint">priority</string>
+    <string name="hashtag_text">#HashTag</string>
+    <string name="hashtag_hint">Eg. #task, #office</string>
+    <string name="complete_task_activity_title">Completed Task</string>
+    <string name="no_task_complete">No task completed.</string>
+    <string name="priority_list_title">Priority:</string>
 </resources>

@@ -19,6 +19,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.binarybricks.mytodolist.provider.SQLOpenHelper;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -43,9 +45,9 @@ public class EditTodoItemActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    private TodoDBHelper todoDBHelper;
-    private Integer editTaskId;
-
+    private SQLOpenHelper todoDBHelper;
+    private Long editTaskId;
+    private ShareActionProvider mShareActionProvider;
 
     Calendar c = Calendar.getInstance();
     int startYear = c.get(Calendar.YEAR);
@@ -63,7 +65,7 @@ public class EditTodoItemActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        editTaskId = getIntent().getIntExtra("task_id", 0);
+        editTaskId = getIntent().getLongExtra("task_id", 0);
         String editTask = getIntent().getStringExtra("edit_task");
         String editDescription = getIntent().getStringExtra("edit_description");
         String editDueDate = getIntent().getStringExtra("edit_due_date");
@@ -76,7 +78,7 @@ public class EditTodoItemActivity extends AppCompatActivity {
         tvEditPriority.setText(editPriority);
         etEditHashTag.setText(editHashTag);
 
-        todoDBHelper = new TodoDBHelper(EditTodoItemActivity.this);
+        todoDBHelper =SQLOpenHelper.getInstance(EditTodoItemActivity.this);
     }
 
     @OnClick(R.id.fabSave)
@@ -119,11 +121,10 @@ public class EditTodoItemActivity extends AppCompatActivity {
         Intent shareIntent=new Intent(Intent.ACTION_SEND);
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT,"#Todo");
+        shareIntent.putExtra(Intent.EXTRA_TEXT,"Task: "+etEditTask.getText()+"\n Description: "+etEditDescription.getText());
         return shareIntent;
     }
 
-    private ShareActionProvider mShareActionProvider;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -132,8 +133,6 @@ public class EditTodoItemActivity extends AppCompatActivity {
                 setResult(RESULT_OK);
                 finish();
                 return true;
-            case R.id.share_todo_item:
-
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -161,7 +160,7 @@ public class EditTodoItemActivity extends AppCompatActivity {
     void setPriority(View v){
         final CharSequence[] priority = {"High","Medium","Low"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Priority:");
+        builder.setTitle(getString(R.string.priority_list_title));
         builder.setItems(priority,new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 tvEditPriority.setText(priority[item]);

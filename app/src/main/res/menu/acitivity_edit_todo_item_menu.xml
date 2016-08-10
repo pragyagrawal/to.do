@@ -4,13 +4,14 @@
 <item
     android:id="@+id/delete_todo_item"
     android:title="@string/delete_title"
-    android:icon="@android:drawable/ic_menu_delete"
+    android:icon="@drawable/delete_button"
     app:showAsAction="always">
 </item>
     <item
         android:id="@+id/share_todo_item"
         android:title="@string/share_title"
-        android:icon="@android:drawable/ic_menu_share"
-        app:showAsAction="always">
+        app:showAsAction="always"
+        app:actionProviderClass=
+            "android.support.v7.widget.ShareActionProvider">
     </item>
 </menu>

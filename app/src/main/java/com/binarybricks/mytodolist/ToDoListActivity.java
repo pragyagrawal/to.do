@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.binarybricks.mytodolist.provider.SQLOpenHelper;
+import com.binarybricks.mytodolist.provider.todo.TodoColumns;
 import com.binarybricks.mytodolist.utils.TodoCursorAdapter;
 import com.wdullaer.swipeactionadapter.SwipeActionAdapter;
 import com.wdullaer.swipeactionadapter.SwipeDirection;
@@ -45,7 +47,7 @@ public class ToDoListActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    TodoDBHelper todoDBHelper;
+    SQLOpenHelper todoDBHelper;
     SwipeActionAdapter swipeAdapter;
     TodoCursorAdapter todoCursorAdapter;
 
@@ -58,7 +60,7 @@ public class ToDoListActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        todoDBHelper = new TodoDBHelper(ToDoListActivity.this);
+        todoDBHelper = SQLOpenHelper.getInstance(ToDoListActivity.this);
 
         fetchTodoList();
         handleIntent(getIntent());
@@ -68,12 +70,12 @@ public class ToDoListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Get the cursor, positioned to the corresponding row in the result set
                 Cursor cursor = (Cursor) lvTodoItemList.getItemAtPosition(position);
-                String task = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_TASK));
-                String description = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_DESCRIPTION));
-                String dueDate = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_DUE_DATE));
-                String priority = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_PRIORITY));
-                String hashTag = cursor.getString(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_HASHTAG));
-                Integer taskId = cursor.getInt(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_ID));
+                String task = cursor.getString(cursor.getColumnIndexOrThrow(TodoColumns.TASK));
+                String description = cursor.getString(cursor.getColumnIndexOrThrow(TodoColumns.DESCRIPTION));
+                String dueDate = cursor.getString(cursor.getColumnIndexOrThrow(TodoColumns.DUEDATE));
+                String priority = cursor.getString(cursor.getColumnIndexOrThrow(TodoColumns.PRIORITY));
+                String hashTag = cursor.getString(cursor.getColumnIndexOrThrow(TodoColumns.HASHTAG));
+                Long taskId = cursor.getLong(cursor.getColumnIndexOrThrow(TodoColumns._ID));
 
                 Intent editTodoIntent = new Intent(ToDoListActivity.this, EditTodoItemActivity.class);
                 editTodoIntent.putExtra("task_id", taskId);
@@ -180,7 +182,7 @@ public class ToDoListActivity extends AppCompatActivity {
                     SwipeDirection direction = directionList[i];
                     int position = positionList[i];
                     Cursor cursor = (Cursor) lvTodoItemList.getItemAtPosition(position);
-                    Integer taskId = cursor.getInt(cursor.getColumnIndexOrThrow(TodoDBHelper.TODO_COLUMN_ID));
+                    Long taskId = cursor.getLong(cursor.getColumnIndexOrThrow(TodoColumns._ID));
                     if (direction == SwipeDirection.DIRECTION_NORMAL_LEFT || direction == SwipeDirection.DIRECTION_FAR_LEFT) {
                         todoDBHelper.deleteTodoItem(taskId);
                     } else if (direction == SwipeDirection.DIRECTION_NORMAL_RIGHT || direction == SwipeDirection.DIRECTION_FAR_RIGHT) {

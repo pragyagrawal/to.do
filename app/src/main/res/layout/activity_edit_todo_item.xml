@@ -30,31 +30,32 @@
                 android:id="@+id/rlTask"
                 android:layout_weight="2"
                 android:background="@color/colorPrimary"
-                android:paddingLeft="16dp">
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingStart="@dimen/activity_horizontal_margin">
 
                 <EditText
                     android:id="@+id/etTask"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
+                    android:layout_margin="@dimen/layout_margin"
                     android:background="@android:color/transparent"
-                    android:hint="Task"
+                    android:hint="@string/edit_task_hint"
                     android:textColor="@color/colorTextIcons"
                     android:textColorHint="@color/colorTextIcons"
-                    android:textSize="28sp" />
+                    android:textSize="@dimen/edit_task_text_size" />
 
                 <EditText
                     android:id="@+id/etDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/etTask"
-                    android:layout_margin="12dp"
+                    android:layout_margin="@dimen/layout_margin"
                     android:background="@android:color/transparent"
-                    android:hint="Description"
+                    android:hint="@string/edit_description_hint"
                     android:lines="3687"
                     android:textColor="@color/colorTextIcons"
                     android:textColorHint="@color/colorTextIcons"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/edit_description_text_size" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -67,13 +68,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:padding="@dimen/activity_horizontal_margin">
 
                     <ImageView
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
-                        android:layout_marginEnd="12dp"
-                        android:layout_marginRight="12dp"
+                        android:layout_width="@dimen/duedate_image_width"
+                        android:layout_height="@dimen/duedate_image_height"
+                        android:layout_marginEnd="@dimen/layout_margin"
+                        android:layout_marginRight="@dimen/layout_margin"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/due_date" />
 
@@ -86,17 +87,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Due Date"
-                            android:textSize="20sp" />
+                            android:text="@string/due_date_text"
+                            android:textSize="@dimen/duedate_text_size" />
 
                         <TextView
                             android:id="@+id/tvSetDueDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tvDueDate"
-                            android:layout_marginTop="4dp"
-                            android:hint="due date"
-                            android:textSize="18sp" />
+                            android:layout_marginTop="@dimen/margin_top_small"
+                            android:hint="@string/due_date_hint"
+                            android:textSize="@dimen/due_date_size" />
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -107,13 +108,13 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/llDueDate"
                     android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:padding="@dimen/activity_horizontal_margin">
 
                     <ImageView
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
-                        android:layout_marginEnd="12dp"
-                        android:layout_marginRight="12dp"
+                        android:layout_width="@dimen/duedate_image_width"
+                        android:layout_height="@dimen/duedate_image_height"
+                        android:layout_marginEnd="@dimen/layout_margin"
+                        android:layout_marginRight="@dimen/layout_margin"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/priority" />
 
@@ -126,17 +127,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Priority"
-                            android:textSize="20sp" />
+                            android:text="@string/priority_text"
+                            android:textSize="@dimen/priority_text_size" />
 
                         <TextView
                             android:id="@+id/tvSetPriority"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tvPriority"
-                            android:layout_marginTop="4dp"
-                            android:hint="priority"
-                            android:textSize="18sp" />
+                            android:layout_marginTop="@dimen/margin_top_small"
+                            android:hint="@string/priority_hint"
+                            android:textSize="@dimen/priority_hint_size" />
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -146,13 +147,13 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/llPriority"
                     android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:padding="@dimen/activity_horizontal_margin">
 
                     <ImageView
-                        android:layout_width="42dp"
-                        android:layout_height="42dp"
-                        android:layout_marginEnd="12dp"
-                        android:layout_marginRight="12dp"
+                        android:layout_width="@dimen/duedate_image_width"
+                        android:layout_height="@dimen/duedate_image_height"
+                        android:layout_marginEnd="@dimen/layout_margin"
+                        android:layout_marginRight="@dimen/layout_margin"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/label" />
 
@@ -165,17 +166,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="#HashTag"
-                            android:textSize="20sp" />
+                            android:text="@string/hashtag_text"
+                            android:textSize="@dimen/hashtag_text_size" />
 
                         <EditText
                             android:id="@+id/etSetHashTag"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tvHashTag"
-                            android:layout_marginTop="4dp"
-                            android:hint="Eg. #task, #office"
-                            android:textSize="18sp" />
+                            android:layout_marginTop="@dimen/margin_top_small"
+                            android:hint="@string/hashtag_hint"
+                            android:textSize="@dimen/hashtag_hint_size" />
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -185,7 +186,7 @@
             android:id="@+id/fabSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/activity_horizontal_margin"
             android:clickable="true"
             android:src="@drawable/done_button"
             app:layout_anchor="@id/rlTask"

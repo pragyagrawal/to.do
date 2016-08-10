@@ -3,15 +3,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="?android:listPreferredItemHeight"
-    android:background="@android:color/holo_blue_bright"
-    android:orientation="horizontal">
+    android:background="@android:color/holo_green_light"
+    android:orientation="horizontal"
+    android:gravity="end">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Complete task"
-        android:textSize="32sp"
+    <ImageView
+        android:layout_width="@dimen/swipe_image_size"
+        android:layout_height="@dimen/swipe_image_size"
         android:layout_gravity="center_vertical"
-        android:gravity="center_horizontal"/>
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:contentDescription="completed task"
+        android:src="@drawable/check_mark"/>
 
 </LinearLayout>

@@ -13,4 +13,9 @@
     <color name="colorPriorityMedium">#f6665b</color>
     <color name="colorPriorityHigh">#f22011</color>
 
+    <color name="widget_background">#bb030b03</color>
+    <color name="widget_heading_background">#aa009688</color>
+    <color name="widget_text_color">#4B4B4D</color>
+    <color name="widget_text_background">#aaa</color>
+
 </resources>

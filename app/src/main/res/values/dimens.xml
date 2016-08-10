@@ -6,6 +6,7 @@
     <dimen name="edit_text_title_text_size">22sp</dimen>
     <dimen name="margin_top_medium">16dp</dimen>
     <dimen name="margin_bottom">32dp</dimen>
+    <dimen name="layout_margin">12dp</dimen>
     <dimen name="edit_item_text_size">18sp</dimen>
     <dimen name="empty_message_text_size">24sp</dimen>
     <dimen name="list_view_margin_bottom">4dp</dimen>
@@ -13,4 +14,26 @@
     <dimen name="list_view_vertical_spacing">12dp</dimen>
     <dimen name="list_item_title_text_size">16sp</dimen>
     <dimen name="todo_item_text_size">20sp</dimen>
+
+    <dimen name="widget_layout_margin">8dp</dimen>
+    <dimen name="widget_padding">8dp</dimen>
+    <dimen name="widget_image_dimens">32dp</dimen>
+    <dimen name="widget_provider_height">220dip</dimen>
+    <dimen name="widget_provider_width">200dip</dimen>
+    <dimen name="edit_task_text_size">28sp</dimen>
+    <dimen name="edit_description_text_size">20sp</dimen>
+    <dimen name="duedate_image_width">42dp</dimen>
+    <dimen name="duedate_image_height">42dp</dimen>
+    <dimen name="duedate_text_size">20sp</dimen>
+    <dimen name="due_date_size">18sp</dimen>
+    <dimen name="priority_text_size">20sp</dimen>
+    <dimen name="priority_hint_size">18sp</dimen>
+    <dimen name="hashtag_text_size">20sp</dimen>
+    <dimen name="hashtag_hint_size">18sp</dimen>
+    <dimen name="empty_message_image_width">60dp</dimen>
+    <dimen name="empty_message_image_height">60dp</dimen>
+    <dimen name="swipe_image_size">42dp</dimen>
+    <dimen name="list_item_priority_width">8dp</dimen>
+    <dimen name="drawable_padding">2dp</dimen>
+    <dimen name="list_item_label_size">12sp</dimen>
 </resources>

@@ -25,22 +25,25 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerInParent="true">
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="@dimen/empty_message_image_width"
+                    android:layout_height="@dimen/empty_message_image_height"
                     android:src="@drawable/add_task"
                     android:id="@+id/ivAddTask"
                     android:visibility="gone"
-                    android:layout_centerInParent="true"/>
+                    android:layout_margin="@dimen/activity_horizontal_margin"
+                    android:layout_gravity="center_horizontal"/>
             <TextView
                 android:id="@+id/emptyListMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/empty_message_text"
+                android:textStyle="italic"
                 android:textSize="@dimen/empty_message_text_size"
                 android:visibility="gone" />
             </LinearLayout>
@@ -57,7 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:divider="@android:color/transparent"
-                android:dividerHeight="4dp" />
+                android:dividerHeight="@dimen/margin_top_small"
+                android:visibility="visible"/>
 
 
         </RelativeLayout>
@@ -66,7 +70,7 @@
             android:id="@+id/fabAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/activity_horizontal_margin"
             android:clickable="true"
             android:src="@drawable/add_task1"
             app:layout_anchor="@id/lvTodoList"

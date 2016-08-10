@@ -3,15 +3,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="?android:listPreferredItemHeight"
-    android:background="@android:color/holo_blue_bright"
+    android:background="@android:color/holo_red_light"
     android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-        android:textSize="32sp"
+    <ImageView
+        android:layout_width="@dimen/swipe_image_size"
+        android:layout_height="@dimen/swipe_image_size"
         android:layout_gravity="center_vertical"
-        android:gravity="center_horizontal"/>
+        android:contentDescription="delete"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:src="@drawable/delete_button"/>
 
 </LinearLayout>

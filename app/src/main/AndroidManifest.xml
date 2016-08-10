@@ -24,7 +24,6 @@
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
-
         </activity>
         <activity android:name=".EditTodoItemActivity">
             <meta-data
@@ -36,6 +35,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ToDoListActivity" />
         </activity>
+
+        <provider
+            android:name="com.binarybricks.mytodolist.provider.TodoDataProvider"
+            android:authorities="com.binarybricks.mytodolist.provider"
+            android:exported="false" />
+
+        <receiver android:name=".widget.TodoWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="com.binarybricks.mytodolist.ACTION_DATA_UPDATED" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/todo_widget_info"/>
+        </receiver>
+
+        <service android:name=".widget.WidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+
     </application>
 
 </manifest>
