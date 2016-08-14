@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.binarybricks.mytodolist.provider.SQLOpenHelper;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -49,10 +50,12 @@ public class EditTodoItemActivity extends AppCompatActivity {
     private Long editTaskId;
     private ShareActionProvider mShareActionProvider;
 
-    Calendar c = Calendar.getInstance();
-    int startYear = c.get(Calendar.YEAR);
-    int startMonth = c.get(Calendar.MONTH);
-    int startDay = c.get(Calendar.DAY_OF_MONTH);
+    private Calendar c = Calendar.getInstance();
+    private int startYear = c.get(Calendar.YEAR);
+    private int startMonth = c.get(Calendar.MONTH);
+    private int startDay = c.get(Calendar.DAY_OF_MONTH);
+
+    private FirebaseAnalytics mFireBaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,8 @@ public class EditTodoItemActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mFireBaseAnalytics = FirebaseAnalytics.getInstance(EditTodoItemActivity.this);
 
         editTaskId = getIntent().getLongExtra("task_id", 0);
         String editTask = getIntent().getStringExtra("edit_task");
@@ -131,6 +136,7 @@ public class EditTodoItemActivity extends AppCompatActivity {
             case R.id.delete_todo_item:
                 todoDBHelper.deleteTodoItem(editTaskId);
                 setResult(RESULT_OK);
+                mFireBaseAnalytics.logEvent("DELETE_TODO",new Bundle());
                 finish();
                 return true;
             default:

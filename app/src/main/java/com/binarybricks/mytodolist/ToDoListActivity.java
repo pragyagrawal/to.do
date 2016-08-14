@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.binarybricks.mytodolist.provider.SQLOpenHelper;
 import com.binarybricks.mytodolist.provider.todo.TodoColumns;
 import com.binarybricks.mytodolist.utils.TodoCursorAdapter;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.wdullaer.swipeactionadapter.SwipeActionAdapter;
 import com.wdullaer.swipeactionadapter.SwipeDirection;
 
@@ -47,9 +48,11 @@ public class ToDoListActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    SQLOpenHelper todoDBHelper;
-    SwipeActionAdapter swipeAdapter;
-    TodoCursorAdapter todoCursorAdapter;
+    private SQLOpenHelper todoDBHelper;
+    private SwipeActionAdapter swipeAdapter;
+    private TodoCursorAdapter todoCursorAdapter;
+
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,9 @@ public class ToDoListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         todoDBHelper = SQLOpenHelper.getInstance(ToDoListActivity.this);
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         fetchTodoList();
         handleIntent(getIntent());
@@ -93,6 +99,7 @@ public class ToDoListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent emptyIntent = new Intent(ToDoListActivity.this, EditTodoItemActivity.class);
                 startActivityForResult(emptyIntent, 100);
+                mFirebaseAnalytics.logEvent("ADD_TODO",new Bundle());
             }
         });
 
@@ -185,8 +192,10 @@ public class ToDoListActivity extends AppCompatActivity {
                     Long taskId = cursor.getLong(cursor.getColumnIndexOrThrow(TodoColumns._ID));
                     if (direction == SwipeDirection.DIRECTION_NORMAL_LEFT || direction == SwipeDirection.DIRECTION_FAR_LEFT) {
                         todoDBHelper.deleteTodoItem(taskId);
+                        mFirebaseAnalytics.logEvent("DELETE_TODO",new Bundle());
                     } else if (direction == SwipeDirection.DIRECTION_NORMAL_RIGHT || direction == SwipeDirection.DIRECTION_FAR_RIGHT) {
                         todoDBHelper.updateStatus(taskId);
+                        mFirebaseAnalytics.logEvent("COMPLETE_TODO",new Bundle());
                     }
                     refreshTaskList();
                     swipeAdapter.notifyDataSetChanged();

@@ -32,7 +32,7 @@
     <dimen name="hashtag_hint_size">18sp</dimen>
     <dimen name="empty_message_image_width">60dp</dimen>
     <dimen name="empty_message_image_height">60dp</dimen>
-    <dimen name="swipe_image_size">42dp</dimen>
+    <dimen name="swipe_image_size">32dp</dimen>
     <dimen name="list_item_priority_width">8dp</dimen>
     <dimen name="drawable_padding">2dp</dimen>
     <dimen name="list_item_label_size">12sp</dimen>

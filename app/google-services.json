@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "931278491343",
+    "firebase_url": "https://todo-f556c.firebaseio.com",
+    "project_id": "todo-f556c",
+    "storage_bucket": "todo-f556c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931278491343:android:e802ef4519df771f",
+        "android_client_info": {
+          "package_name": "com.binarybricks.mytodolist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "931278491343-0g45fin8iap7vrlqtvfcrlf5nh67qkl9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIvscbP0rcS2UUh-wXn4MYc3gg8cLWGTA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
