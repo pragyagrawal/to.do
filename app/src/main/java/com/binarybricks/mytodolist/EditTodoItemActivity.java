@@ -32,6 +32,7 @@ import butterknife.OnClick;
 
 public class EditTodoItemActivity extends AppCompatActivity {
 
+    public static final String MMM_DD_YYYY = "MMM dd,yyyy";
     @BindView(R.id.etTask)
     EditText etEditTask;
     @BindView(R.id.etDescription)
@@ -152,7 +153,7 @@ public class EditTodoItemActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
              //you will get date here
                 GregorianCalendar calendar = new GregorianCalendar(year,monthOfYear,dayOfMonth);
-                SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy");
+                SimpleDateFormat sdf = new SimpleDateFormat(MMM_DD_YYYY);
                 sdf.setCalendar(calendar);
                 String formatedDate = sdf.format(calendar.getTime());
                 tvEditDueDate.setText(formatedDate);

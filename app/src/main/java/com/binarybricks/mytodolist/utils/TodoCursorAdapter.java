@@ -11,12 +11,21 @@ import android.widget.TextView;
 import com.binarybricks.mytodolist.R;
 import com.binarybricks.mytodolist.provider.todo.TodoColumns;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by PRAGYA on 8/1/2016.
  */
 public class TodoCursorAdapter extends CursorAdapter {
+
+    SimpleDateFormat sdf;
+    public static final String MMM_DD_YYYY = "MMM dd,yyyy";
+
     public TodoCursorAdapter(Context context, Cursor cursor) {
         super(context, cursor);
+        sdf = new SimpleDateFormat(MMM_DD_YYYY);
     }
 
     // The newView method is used to inflate a new view and return it,
@@ -48,6 +57,20 @@ public class TodoCursorAdapter extends CursorAdapter {
         // Populate fields with extracted properties
         tvTask.setText(task);
         tvDescription.setText(description);
+
+        Date date = new Date();
+
+        try {
+            date = sdf.parse(dueDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (date != null && date.compareTo(new Date())<=0){
+            tvDueDate.setTextColor(context.getResources().getColor(R.color.colorPriorityHigh));
+        }else {
+            tvDueDate.setTextColor(context.getResources().getColor(R.color.colorSecondaryText));
+        }
         tvDueDate.setText(dueDate);
         tvLabel.setText(label);
         switch (priority) {
