@@ -1,11 +1,11 @@
 # Pre-work - *To.Do*
 
 **To.Do** is an android app that allows building a todo list and basic todo items management functionality including adding new items, editing and deleting an existing item. Adding a todo widget etc.
-It is similar to Google Keep ToDo app.
+
 
 Submitted by: **Pragya Agrawal**
 
-Time spent: **30** hours spent in total
+Time spent: **35** hours spent in total
 
 ## User Stories
 
@@ -25,12 +25,18 @@ The following **optional** features are implemented:
 * [ ] Tweak the style improving the UI / UX, play with colors, images or backgrounds
 * [ ] UI Improved with full material design.
 * [ ] User can add a todo Widget on home screen 
+* [ ] Daily notifications for user on due dates.
 
 Todo Future Improvements : The following **additional** features can be implemented in Future
 
 * [ ] UI Can further improved. 
-* [ ] Option to remind user on todo due dates.  
-* 
+* [ ] New concepts like recycler view can be used.
+* [ ] App architecture can be improved.
+* [ ] New functionality to save todo on server using firebase.
+
+## Play store link
+https://play.google.com/store/apps/details?id=com.binarybricks.mytodolist
+
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
@@ -50,7 +56,8 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 Describe any challenges encountered while building the app.
 
 * Data Persistence in android is challenging, one requires to add lot of boiler plate code to make it work. 
-* Adding a widget requires you to work with content providers that are challenging. 
+* Adding a widget requires you to work with content providers that are challenging.
+* Running a task after fix interval is challenging, you have to consider various facts like battery, performance,etc. GCM network manager solves most of this issues without an overhead.
 
 ## License
 
